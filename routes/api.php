@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\API\ShipmentController;
+use App\Http\Controllers\Admin\API\UserAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-Route::get('/show', [ShipmentController::class, 'index']);
+
+Route::post('/register', [UserAuthController::class, 'register']);
+Route::post('/login', [UserAuthController::class, 'login']);
+
+// Private Routes
+// These Routes Must Be Accessed Via Access Token For Logged-in User
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/index', [ShipmentController::class, 'index']);
+    Route::get('/search', [ShipmentController::class, 'search']);
+    Route::post('/logout', [UserAuthController::class, 'logout']);
+});
+
+// Public Routes
+// These Routes Would Be Accessed By Guest Users
+Route::get('/index', [ShipmentController::class, 'index']);
+Route::get('/search', [ShipmentController::class, 'search']);

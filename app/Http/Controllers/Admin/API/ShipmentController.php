@@ -97,4 +97,13 @@ class ShipmentController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $query = Shipment::with('products');
+        if($s = $request->input('s')){
+            $query->whereRaw("number LIKE '%". $s ."%'");
+        }
+        return $query->get();
+    }
 }
