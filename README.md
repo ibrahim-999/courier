@@ -37,6 +37,12 @@ Login Credentials for admin panel reach for http://localhost:8000/admin or http:
 
 - AdminLTE template for the backend
 
+- implemented two types of auth [ guard , sanctum][ admin , user ]
+- two types of api routes public and private for the user
+- all the api requests tested export in a collection it will be attached to the mail
+- 
+
 -- if there is any issues regrading anything of the project please I would be glad to inform me and 
 
 -- I'm most anxious for your feedback
+
