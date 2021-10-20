@@ -49,7 +49,7 @@ class CourierController extends Controller
             // Save Courier Details
             $courier->name = $data['name'];
             $courier->address = $data['address'];
-            $courier->number='COU-'.strtoupper(Str::random(10));
+            $courier->number='COU-'.strtoupper(Str::random(5));
             $courier->save();
             session::flash('success_message',$message);
             return redirect('admin/couriers');
