@@ -41,12 +41,15 @@ class ShipmentsController extends Controller
             $shipmentdata = Shipment::find($id);
             $shipmentdata = json_decode(json_encode($shipmentdata),true);
             $shipment = Shipment::find($id);
+            /*dd($shipment->products->pluck('id'));*/
             $message = "Shipment has been updated successfully!";
             //Edit Product
         }
         if ($request->isMethod('post'))
         {
             $data = $request->all();
+
+          /*  dd($data); die;*/
 
             $rules = [
                 'description' => 'required',

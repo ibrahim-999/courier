@@ -83,18 +83,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Select Product</label>
-                                        <select name="product_id" id="product_id" class="form-control select2" style="width: 100%;">
+                                        <select name="product_id[]" id="product_id" multiple="" class="form-control select2" style="width: 100%;">
                                             <option  value="">Select</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product['id'] }}"
-                                                        @if(!empty($shipmentdata['product_id']) && $shipmentdata['product_id'] == $product['id']) selected  @endif>{{$product['name']}} </option>
+                                                        @if(!empty($shipmentdata->products['id']) && $shipmentdata['product_id']) selected  @endif>{{$product['name']}} </option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>Select Status</strong></label><br/>
-                                        <select class="form-control" name="status">
+                                        <select class="form-control" name="status" id="status">
                                             <option value="Pending">Pending</option>
                                             <option value="Picked">Picked</option>
                                             <option value="OFD">OFD</option>
