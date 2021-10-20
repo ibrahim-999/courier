@@ -19,7 +19,7 @@ class AdminController extends Controller
         if($request->isMethod('post'))
         {
             $data = $request->all();
-            //echo "<pre>"; print_r($data); die;
+
 
             $rules = [
                 'email' => 'required|email|max:255',

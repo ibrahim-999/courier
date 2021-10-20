@@ -15,8 +15,6 @@ class ProductsController extends Controller
     {
         Session::put('page', 'products');
         $products = Product::with('shipments')->get();
-         /*echo "<pre>"; print_r($products); die;*/
-        $products = json_decode(json_encode($products));
         return view('admin.products.products')->with(compact('products'));
     }
     public function addEditProduct( Request $request, $id=null)
@@ -33,7 +31,6 @@ class ProductsController extends Controller
         {
             $title = "Edit Product";
             $productdata = Product::find($id);
-            $productdata = json_decode(json_encode($productdata),true);
             $product = Product::find($id);
             $message = "Product has been updated successfully!";
             //Edit Product
@@ -43,8 +40,8 @@ class ProductsController extends Controller
             $data = $request->all();
             // Validation
             $rules = [
-                'name' => 'required',
-                'image' => 'required'
+                'name' => 'required|string',
+                'image' => 'required|image'
             ];
             $customMessages = [
                 'name.required' => 'Name is required',
@@ -79,7 +76,6 @@ class ProductsController extends Controller
     }
     public function deleteProduct($id)
     {
-        //Delete Product
         Product::where('id',$id)->delete();
         $message = 'Product has been deleted!';
         session()->flash('success_message',$message);

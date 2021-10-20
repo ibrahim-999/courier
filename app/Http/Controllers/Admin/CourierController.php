@@ -14,7 +14,6 @@ class CourierController extends Controller
     {
         Session::put('page', 'couriers');
         $couriers = Courier::all();
-        $couriers = json_decode(json_encode($couriers));
         return view('admin.couriers.couriers')->with(compact('couriers'));
     }
     public function addEditCourier( Request $request, $id=null)
@@ -25,16 +24,13 @@ class CourierController extends Controller
             $courier = new  Courier();
             $courierdata = array();
             $message = "Courier has been added successfully!";
-            //Add Courier
         }
         else
         {
             $title = "Edit Courier";
             $courierdata = Courier::find($id);
-            $courierdata = json_decode(json_encode($courierdata),true);
             $courier = Courier::find($id);
             $message = "Courier has been updated successfully!";
-            //Edit Courier
         }
         if ($request->isMethod('post'))
         {
@@ -42,7 +38,7 @@ class CourierController extends Controller
             // Validation
             $rules = [
                 'name' => 'required|regex:/^[\pL\s\-]+$/u',
-                'address' => 'required',
+                'address' => 'required|string',
             ];
             $customMessages = [
                 'name.required' => 'Name is required',

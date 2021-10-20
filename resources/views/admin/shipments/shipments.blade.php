@@ -62,11 +62,7 @@
                                             <td>{{$shipment->id}}</td>
                                             <td>{{$shipment->number}}</td>
                                             <td>{{$shipment->courier->name}}</td>
-                                            <td>
-                                                @foreach($shipment->products as $product)
-                                                    {{$product->name}}
-                                                @endforeach
-                                            </td>
+                                            <td>{{implode(' - ', $shipment->products->pluck('name')->toArray())}}</td>
                                             <td>{{$shipment->description}}</td>
                                             <td>{{$shipment->address}}</td>
                                             <td>{{$shipment->status}}</td>

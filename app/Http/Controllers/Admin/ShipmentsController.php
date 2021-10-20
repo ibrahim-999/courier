@@ -20,8 +20,6 @@ class ShipmentsController extends Controller
         },'products'=>function($query){
             $query->select('name');
         }])->get();
-        //$shipments = Shipment::where('status',"Delivered")->get();
-        //dd($shipments); die;
         return view('admin.shipments.shipments')->with(compact('shipments'));
     }
 
@@ -33,7 +31,6 @@ class ShipmentsController extends Controller
             $shipment = new  Shipment();
             $shipmentdata = array();
             $message = "Shipment has been added successfully!";
-            //Add Product
         }
         else
         {
@@ -41,20 +38,18 @@ class ShipmentsController extends Controller
             $shipmentdata = Shipment::find($id);
             $shipmentdata = json_decode(json_encode($shipmentdata),true);
             $shipment = Shipment::find($id);
-            /*dd($shipment->products->pluck('id'));*/
             $message = "Shipment has been updated successfully!";
-            //Edit Product
+
         }
         if ($request->isMethod('post'))
         {
             $data = $request->all();
 
-          /*  dd($data); die;*/
-
             $rules = [
                 'description' => 'required',
                 'address' => 'required',
                 'courier_id'=>'required',
+                'product_id'=>'required|array',
             ];
             $customMessages = [
                 'description.required' => 'Description is required',
@@ -70,17 +65,20 @@ class ShipmentsController extends Controller
             $shipment->status = $data['status'];
             $shipment->save();
             $product = Product::find($data['product_id']);
-            $shipment->products()->attach($product);
+            $shipment->products()->sync($product);
             session::flash('success_message',$message);
             return redirect('admin/shipments');
 
         }
 
         $couriers = Courier::get();
-        $couriers = json_decode(json_encode($couriers),true);
-        $products = Product::get()->toArray();
-        $products = json_decode(json_encode($products),true);
-        return view ('admin.shipments.add_edit_shipment')->with(compact('title','shipmentdata','couriers','products'));
+        $products = Product::get()->toArray();// retrieve all the products
+        $shipmentProducts = $shipment->products->pluck('id')->toArray();
+        return view ('admin.shipments.add_edit_shipment')->with(compact('title',
+            'shipmentdata',
+            'couriers',
+            'products',
+            'shipmentProducts'));
     }
 
     public function deleteShipment($id)

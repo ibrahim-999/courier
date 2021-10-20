@@ -87,7 +87,7 @@
                                             <option  value="">Select</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product['id'] }}"
-                                                        @if(!empty($shipmentdata->products['id']) && $shipmentdata['product_id']) selected  @endif>{{$product['name']}} </option>
+                                                        @if(in_array($product['id'], $shipmentProducts)) selected  @endif>{{$product['name']}} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -95,10 +95,10 @@
                                     <div class="form-group">
                                         <label><strong>Select Status</strong></label><br/>
                                         <select class="form-control" name="status" id="status">
-                                            <option value="Pending">Pending</option>
-                                            <option value="Picked">Picked</option>
-                                            <option value="OFD">OFD</option>
-                                            <option value="Delivered">Delivered</option>
+                                            <option value="Pending" {{isset($shipmentdata['status']) && $shipmentdata['status'] == "Pending" ? "selected" : ""}}>Pending</option>
+                                            <option value="Picked" {{isset($shipmentdata['status']) && $shipmentdata['status'] == "Picked" ? "selected" : ""}}>Picked</option>
+                                            <option value="OFD" {{isset($shipmentdata['status']) && $shipmentdata['status'] == "OFD" ? "selected" : ""}}>OFD</option>
+                                            <option value="Delivered" {{isset($shipmentdata['status']) && $shipmentdata['status'] == "Delivered" ? "selected" : ""}}>Delivered</option>
                                         </select>
                                     </div>
 
