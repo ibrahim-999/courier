@@ -40,7 +40,7 @@ Login Credentials for admin panel reach for http://localhost:8000/admin or http:
 - implemented two types of auth [ guard , sanctum][ admin , user ]
 - two types of api routes public and private for the user
 - all the api requests tested export in a collection it will be attached to the mail
-- 
+
 
 -- if there is any issues regrading anything of the project please do not hesitate to inform me and 
 
