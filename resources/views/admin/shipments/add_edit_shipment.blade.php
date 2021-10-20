@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Select Product</label>
-                                        <select name="product_id" id="product_id" class="form-control select2" multiple="" style="width: 100%;">
+                                        <select name="product_id" id="product_id" class="form-control select2" style="width: 100%;">
                                             <option  value="">Select</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product['id'] }}"
@@ -93,7 +93,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>Select Status :</strong></label><br/>
+                                        <label><strong>Select Status</strong></label><br/>
                                         <select class="form-control" name="status">
                                             <option value="php">Pending</option>
                                             <option value="react">Picked</option>

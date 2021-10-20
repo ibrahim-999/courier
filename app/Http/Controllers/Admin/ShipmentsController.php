@@ -46,6 +46,19 @@ class ShipmentsController extends Controller
         if ($request->isMethod('post'))
         {
             $data = $request->all();
+
+            $rules = [
+                'description' => 'required',
+                'address' => 'required',
+                'courier_id'=>'required',
+            ];
+            $customMessages = [
+                'description.required' => 'Description is required',
+                'address.required' => 'Address is required',
+                'courier_id.required' => 'Courier name is required',
+            ];
+            $this->validate($request,$rules,$customMessages);
+
             $shipment->courier_id = $data['courier_id'];
             $shipment->number='SHP-'.strtoupper(Str::random(10));
             $shipment->description = $data['description'];

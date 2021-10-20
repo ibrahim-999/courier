@@ -43,22 +43,14 @@ class CourierController extends Controller
             $rules = [
                 'name' => 'required|regex:/^[\pL\s\-]+$/u',
                 'address' => 'required',
-                'number' =>'required|numeric',
             ];
-            /*$customMessages = [
-                'category_id.required' => 'Category Name is required',
-                'brand_id.required' => 'Brand Name is required',
-                'Courier_name.required' => ' Name is required',
-                'Courier_name.regex'=>'Valid Courier name is required',
-                'Courier_code.required' => 'Code  is required',
-                'Courier_price.required' => 'Price  is required',
-                'Courier_price.numeric' => 'Valid Price is required',
-                'Courier_color.required' => 'Color  is required',
-
+            $customMessages = [
+                'name.required' => 'Name is required',
+                'name.regex' => 'Valid courier name is required',
+                'address.required' => ' Address is required',
             ];
-            $this->validate($request,$rules,$customMessages);*/
+            $this->validate($request,$rules,$customMessages);
             // Save Courier Details
-
             $courier->name = $data['name'];
             $courier->address = $data['address'];
             $courier->number='COU-'.strtoupper(Str::random(10));

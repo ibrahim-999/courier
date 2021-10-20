@@ -43,8 +43,14 @@ class ProductsController extends Controller
             $data = $request->all();
             // Validation
             $rules = [
-                'name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'name' => 'required',
+                'image' => 'required'
             ];
+            $customMessages = [
+                'name.required' => 'Name is required',
+                'image.required' => ' Image is required',
+            ];
+            $this->validate($request,$rules,$customMessages);
             //Upload Product image
             if($request->hasFile('image'))
             {
@@ -62,7 +68,6 @@ class ProductsController extends Controller
                     Image::make($image_tmp)->resize(250,250)->save($small_image_path);
                     //Save image in the product table
                     $product->image = $imageName;
-
                 }
             }
             $product->name = $data['name'];
