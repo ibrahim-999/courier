@@ -20,6 +20,7 @@ class ShipmentsController extends Controller
         },'products'=>function($query){
             $query->select('name');
         }])->get();
+        //$shipments = Shipment::where('status',"Delivered")->get();
         //dd($shipments); die;
         return view('admin.shipments.shipments')->with(compact('shipments'));
     }

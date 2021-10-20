@@ -95,10 +95,10 @@
                                     <div class="form-group">
                                         <label><strong>Select Status</strong></label><br/>
                                         <select class="form-control" name="status">
-                                            <option value="php">Pending</option>
-                                            <option value="react">Picked</option>
-                                            <option value="jquery">OFD</option>
-                                            <option value="javascript">Delivered</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Picked">Picked</option>
+                                            <option value="OFD">OFD</option>
+                                            <option value="Delivered">Delivered</option>
                                         </select>
                                     </div>
 
