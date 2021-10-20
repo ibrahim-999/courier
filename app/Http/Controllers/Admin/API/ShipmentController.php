@@ -15,7 +15,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $delivered_shipments = Shipment::with('products')
+        $delivered_shipments = Shipment::with('products','courier')
             ->where('status','Delivered')
             ->orderBy('created_at','ASC')->get();
         if(count($delivered_shipments) < 1)
@@ -100,7 +100,7 @@ class ShipmentController extends Controller
 
     public function search(Request $request)
     {
-        $query = Shipment::with('products');
+        $query = Shipment::with('products','courier');
         if($s = $request->input('s')){
             $query->whereRaw("number LIKE '%". $s ."%'");
         }

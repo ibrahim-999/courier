@@ -15,11 +15,7 @@ class ShipmentsController extends Controller
     public function shipments()
     {
         Session::put('page', 'shipments');
-        $shipments = Shipment::with(['courier'=>function($query){
-            $query->select('id','name');
-        },'products'=>function($query){
-            $query->select('name');
-        }])->get();
+        $shipments = Shipment::with('courier')->get();
         return view('admin.shipments.shipments')->with(compact('shipments'));
     }
 
